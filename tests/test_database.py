@@ -9,5 +9,4 @@ def test_create_user(session):
     session.commit()
 
     user = session.scalar(select(User).where(User.username == "alice"))
-
     assert user.username == "alice"

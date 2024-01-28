@@ -3,10 +3,7 @@ from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
 from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship
 from datetime import datetime
 from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
-
-
-class Base(DeclarativeBase):
-    pass
+from meu_projeto_chat.database import Base
 
 
 class User(Base):

@@ -6,7 +6,7 @@ from fastapi.responses import RedirectResponse
 
 from meu_projeto_chat.api.routes import user_routes
 
-from meu_projeto_chat.api.router import auth_routes
+from meu_projeto_chat.api.routes import auth_routes
 
 app = FastAPI()
 
