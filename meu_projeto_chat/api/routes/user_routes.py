@@ -42,17 +42,18 @@ def get_user(user_id: int, user_service: UserService = Depends(get_user_service)
 
 @router.put("/{user_id}", response_model=UserPublic)
 def update_user(
-    user_update: UserSchema,
+    user_id: int,
+    user_update: UserUpdateSchema,
     current_user: User = Depends(get_current_user),
     user_service: UserService = Depends(get_user_service),
 ):
-    print("&" * 100)
-    print(current_user.email)
     if current_user.email != user_update.email:
         raise HTTPException(
             status_code=403, detail="Não autorizado a atualizar este usuário"
         )
-    updated_user = user_service.update_user(current_user.id, user_update.dict())
+    updated_user = user_service.update_user(
+        current_user.id, user_update.dict(exclude_none=True)
+    )
     return updated_user
 
 
