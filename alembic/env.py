@@ -5,7 +5,7 @@ from sqlalchemy import pool
 
 from alembic import context
 from meu_projeto_chat.core.settings import Settings
-from meu_projeto_chat.models.user import Base
+from meu_projeto_chat.database import Base
 
 config = context.config
 config.set_main_option("sqlalchemy.url", Settings().DATABASE_URL)
