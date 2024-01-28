@@ -1,5 +1,6 @@
 from meu_projeto_chat.core.exceptions import EmailAlreadyExistsException
 from meu_projeto_chat.repositories.user_repository import UserRepository
+from meu_projeto_chat.core.security import get_password_hash
 
 
 class UserService:

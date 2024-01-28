@@ -7,14 +7,13 @@ from pydantic import BaseModel, ConfigDict, EmailStr
 class UserSchema(BaseModel):
     username: str
     email: EmailStr
-    password: str
+    password: str | None = None
 
 
 class UserPublic(BaseModel):
     id: int
     username: str
     email: EmailStr
-    password: str  # Incluindo senha hashada
     model_config = ConfigDict(from_attributes=True)
 
 
@@ -40,5 +39,6 @@ class TokenData(BaseModel):
 
 
 class UserUpdateSchema(BaseModel):
-    name: str | None = None
-    email: str | None = None
+    username: str
+    email: EmailStr
+    password: str | None = None
