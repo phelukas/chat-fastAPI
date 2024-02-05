@@ -1,13 +1,20 @@
-from enum import Enum
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, Text
-from sqlalchemy.orm import declarative_base, Mapped, mapped_column, relationship
 from datetime import datetime
-from sqlalchemy.orm import DeclarativeBase, Mapped, mapped_column, relationship
+from enum import Enum
+
+from sqlalchemy import Column, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy.orm import (
+    DeclarativeBase,
+    Mapped,
+    declarative_base,
+    mapped_column,
+    relationship,
+)
+
 from meu_projeto_chat.database import Base
 
 
 class User(Base):
-    __tablename__ = "users"
+    __tablename__ = 'users'
 
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column()

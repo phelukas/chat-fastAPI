@@ -5,12 +5,10 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
 from sqlalchemy.pool import StaticPool
 
-
 from meu_projeto_chat.app import app
-
-from meu_projeto_chat.database import get_session, Base
-from meu_projeto_chat.models.user import User
 from meu_projeto_chat.core.security import get_password_hash
+from meu_projeto_chat.database import Base, get_session
+from meu_projeto_chat.models.user import User
 
 
 @pytest.fixture
@@ -28,8 +26,8 @@ def client(session):
 @pytest.fixture
 def session():
     engine = create_engine(
-        "sqlite:///:memory:",
-        connect_args={"check_same_thread": False},
+        'sqlite:///:memory:',
+        connect_args={'check_same_thread': False},
         poolclass=StaticPool,
     )
     Session = sessionmaker(autocommit=False, autoflush=False, bind=engine)
@@ -45,28 +43,28 @@ def session():
 
 @pytest.fixture
 def user(session):
-    password = "testtest"
+    password = 'testtest'
     user = UserFactory(password=get_password_hash(password))
 
     session.add(user)
     session.commit()
     session.refresh(user)
 
-    user.clean_password = "testtest"
+    user.clean_password = 'testtest'
 
     return user
 
 
 @pytest.fixture
 def other_user(session):
-    password = "testtest"
+    password = 'testtest'
     user = UserFactory(password=get_password_hash(password))
 
     session.add(user)
     session.commit()
     session.refresh(user)
 
-    user.clean_password = "testtest"
+    user.clean_password = 'testtest'
 
     return user
 
@@ -74,10 +72,10 @@ def other_user(session):
 @pytest.fixture
 def token(client, user):
     response = client.post(
-        "/auth/token",
-        data={"username": user.email, "password": user.clean_password},
+        '/auth/token',
+        data={'username': user.email, 'password': user.clean_password},
     )
-    return response.json()["access_token"]
+    return response.json()['access_token']
 
 
 class UserFactory(factory.Factory):
@@ -85,6 +83,6 @@ class UserFactory(factory.Factory):
         model = User
 
     id = factory.Sequence(lambda n: n)
-    username = factory.LazyAttribute(lambda obj: f"test{obj.id}")
-    email = factory.LazyAttribute(lambda obj: f"{obj.username}@test.com")
-    password = factory.LazyAttribute(lambda obj: f"{obj.username}@example.com")
+    username = factory.LazyAttribute(lambda obj: f'test{obj.id}')
+    email = factory.LazyAttribute(lambda obj: f'{obj.username}@test.com')
+    password = factory.LazyAttribute(lambda obj: f'{obj.username}@example.com')

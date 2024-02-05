@@ -1,5 +1,9 @@
 import pytest
-from meu_projeto_chat.api.dependencies import get_user_service, get_auth_service
+
+from meu_projeto_chat.api.dependencies import (
+    get_auth_service,
+    get_user_service,
+)
 
 
 def test_get_user_service(session):

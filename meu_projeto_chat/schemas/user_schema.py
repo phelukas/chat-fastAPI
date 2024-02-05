@@ -1,6 +1,5 @@
 # app/schemas/user_schema.py
 
-from pydantic import BaseModel, EmailStr
 from pydantic import BaseModel, ConfigDict, EmailStr
 
 
@@ -40,5 +39,4 @@ class TokenData(BaseModel):
 
 class UserUpdateSchema(BaseModel):
     username: str
-    email: EmailStr
     password: str | None = None

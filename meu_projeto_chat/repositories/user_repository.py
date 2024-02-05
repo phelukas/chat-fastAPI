@@ -1,12 +1,12 @@
-from sqlalchemy.orm import Session
-from meu_projeto_chat.models.user import User
-from meu_projeto_chat.database import get_session
-from meu_projeto_chat.core.security import get_current_user
 from typing import Annotated
+
 from fastapi import APIRouter, Depends, HTTPException
 from sqlalchemy import select
-from meu_projeto_chat.core.security import get_password_hash
+from sqlalchemy.orm import Session
 
+from meu_projeto_chat.core.security import get_current_user, get_password_hash
+from meu_projeto_chat.database import get_session
+from meu_projeto_chat.models.user import User
 
 __session__ = Annotated[Session, Depends(get_session)]
 CurrentUser = Annotated[User, Depends(get_current_user)]
@@ -20,9 +20,9 @@ class UserRepository:
         return self.db_session.query(User).all()
 
     def create_user(self, user_data: dict) -> User:
-        hashed_password = get_password_hash(user_data["password"])
+        hashed_password = get_password_hash(user_data['password'])
 
-        user_data["password"] = hashed_password
+        user_data['password'] = hashed_password
 
         new_user = User(**user_data)
         self.db_session.add(new_user)
