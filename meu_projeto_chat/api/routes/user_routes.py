@@ -47,10 +47,6 @@ def update_user(
     current_user: User = Depends(get_current_user),
     user_service: UserService = Depends(get_user_service),
 ):
-    if current_user.email != user_update.email:
-        raise HTTPException(
-            status_code=403, detail='Não autorizado a atualizar este usuário'
-        )
     updated_user = user_service.update_user(
         current_user.id, user_update.dict(exclude_none=True)
     )

@@ -38,5 +38,5 @@ class TokenData(BaseModel):
 
 
 class UserUpdateSchema(BaseModel):
-    username: str
+    username: str | None = None
     password: str | None = None
